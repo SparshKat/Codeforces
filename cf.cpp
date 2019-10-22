@@ -1,38 +1,27 @@
 #include<iostream>
-#include<stack>
+#include<vector>
 using namespace std;
+
+int devuSing(int n,int d){
+    vector<int> v;
+    int gaps=n-1, sum=0, ans = 0;
+    for(int i=0;i<n;i++){
+        int temp ;
+        cin >> temp;
+        v.push_back(temp);
+        sum+= temp;
+    }
+    sum+= (n-1)*10;
+    if(sum>d) return -1;
+    ans += (n-1)*2;
+    return ans += (d-sum)/5;
+}
 
 
 int main(){
-    int flag= 0;
-    stack<int> s1,s2,s3;
-    int n ;
-    cin >> n;
-    for(int i=1;i<=n;i++){
-        int el = 0;
-        cin >> el;
-        if(el==1){
-            s1.push(i);
-            continue;
-        } else if(el==2){
-            s2.push(i);
-        } else if(el==3){
-            s3.push(i);
-        }
-    }
-    int el1,el2,el3 ;
-    int temp = min(s1.size() , min(s2.size() , s3.size()));
-    if(temp!=0) cout << temp << endl;
-    
-    while(!s1.empty() && !s2.empty() && !s3.empty()){
-        flag = 1;
-        el1 = s1.top();
-        el2 = s2.top();
-        el3 = s3.top();
-        cout << el1 << " " << el2 << " "<<el3 <<endl;
-        s1.pop(); s2.pop(); s3.pop();
-    }
-    if(flag==0) cout << "0"<<endl;
+    int n,d;
+    cin >> n >> d;
+    int temp = devuSing(n,d);
+    cout << temp << endl;
     return 0;
-    
 }
