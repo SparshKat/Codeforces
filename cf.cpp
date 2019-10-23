@@ -2,26 +2,34 @@
 #include<vector>
 using namespace std;
 
-int devuSing(int n,int d){
-    vector<int> v;
-    int gaps=n-1, sum=0, ans = 0;
+void snakeMat(int n,int m){
+    vector<vector<char>> arr(n,vector<char> (m,'.'));
+    
+    int i=0,j=0 ,flag =0;
     for(int i=0;i<n;i++){
-        int temp ;
-        cin >> temp;
-        v.push_back(temp);
-        sum+= temp;
+        if(i%2==0){
+            vector<char> temp(m,'#');
+            arr[i] = temp ;
+        } else if(i%2!=0 && flag == 0){
+            arr[i][m-1]= '#';
+            flag = 1;
+        } else if(i%2!=0 && flag==1){
+            arr[i][0] = '#';
+            flag = 0;
+        }
     }
-    sum+= (n-1)*10;
-    if(sum>d) return -1;
-    ans += (n-1)*2;
-    return ans += (d-sum)/5;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cout << arr[i][j];
+        }
+        cout <<endl;
+    }
 }
 
 
 int main(){
-    int n,d;
-    cin >> n >> d;
-    int temp = devuSing(n,d);
-    cout << temp << endl;
+    int n,m;
+    cin >> n >> m;
+    snakeMat(n,m); 
     return 0;
 }
